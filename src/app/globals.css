@@ -17,3 +17,28 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+@layer components {
+  .card {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: theme("spacing.6");
+    box-shadow: theme("boxShadow.xl");
+  }
+  .card:hover {
+    -webkit-box-shadow: 3px 3px 20px -5px rgba(242, 242, 242, 1);
+    -moz-box-shadow: 3px 3px 20px -5px rgba(242, 242, 242, 1);
+    box-shadow: 3px 3px 20px -5px rgba(242, 242, 242, 1);
+    scale: 1.07;
+    animation: 0.3s make-bigger ease;
+  }
+
+  @keyframes make-bigger {
+    from {
+      scale: 1;
+    }
+    to {
+      scale: 1.07;
+    }
+  }
+  /* ... */
+}
