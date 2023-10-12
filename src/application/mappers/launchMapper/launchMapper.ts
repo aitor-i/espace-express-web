@@ -11,6 +11,7 @@ interface FormattedLaunch {
   name: string;
   rocket: Rocket;
   number: number;
+  id: string;
 }
 
 export function launchMapper(
@@ -33,6 +34,7 @@ export function launchMapper(
       rocket,
       number: launch.flight_number,
       crew,
+      id: launch.id,
     } as FormattedLaunch;
     return formattedLaunch;
   });

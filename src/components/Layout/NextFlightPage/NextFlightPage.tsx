@@ -47,10 +47,11 @@ export const NextFlightPage = () => {
         <Navigation />
       </div>
       <h1 className="text-4xl self-start">Next Flights</h1>
-      <div>
+      <div className="flex gap-10 flex-wrap ">
         {formattedLaunches &&
           formattedLaunches.map((launch) => (
             <FlightCard
+              id={launch.id}
               key={launch.number}
               crew={launch.crew}
               date={launch.date}
