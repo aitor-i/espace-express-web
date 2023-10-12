@@ -3,7 +3,8 @@ import React from "react";
 
 export default function Navigation() {
   return (
-    <div>
+    <div className="flex gap-3">
+      <Link href="/">Home</Link>
       <Link href="/next-flight">Next flights</Link>
     </div>
   );
