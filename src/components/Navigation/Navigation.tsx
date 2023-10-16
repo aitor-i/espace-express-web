@@ -6,6 +6,7 @@ export default function Navigation() {
     <div className="flex gap-3">
       <Link href="/">Home</Link>
       <Link href="/next-flight">Next flights</Link>
+      <Link href="/login">Login</Link>
     </div>
   );
 }
