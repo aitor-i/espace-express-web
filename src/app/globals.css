@@ -37,10 +37,17 @@ h3 {
   backdrop-filter: blur(3px);
   background: rgba(255, 255, 255, 0.1);
   background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   /* background-color: red; */
 }
 .backgroundImgFit {
   height: calc(100vh - 10rem);
+}
+
+input {
+  color: black;
+  padding: 0.5rem;
+  font-size: 0.8;
 }
 
 @layer components {
