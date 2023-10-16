@@ -37,15 +37,15 @@ export const LoginPage = () => {
           action=""
           className="flex flex-col gap-8"
         >
-          <span className="flex flex-col gap-4">
+          <span className="flex flex-col ">
             <label htmlFor="">Email</label>
             <input type="email" name="email" id="email" />
           </span>
-          <span className="flex flex-col gap-4">
+          <span className="flex flex-col ">
             <label htmlFor="">Password</label>
             <input type="password" name="password" id="password" />
           </span>
-          <button>Send</button>
+          <button className="primaryButton">Send</button>
         </form>
       </div>
     </main>
