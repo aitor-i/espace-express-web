@@ -48,6 +48,25 @@ input {
   color: black;
   padding: 0.5rem;
   font-size: 0.8;
+  border-radius: 3px;
+}
+
+button {
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  font-weight: bold;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+button:hover {
+  scale: 1.07;
+  animation: 0.2s make-bigger ease-out;
+}
+
+.primaryButton {
+  background-color: black;
+  color: white;
 }
 
 @layer components {
