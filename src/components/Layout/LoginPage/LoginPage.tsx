@@ -4,9 +4,16 @@ import Image from "next/image";
 import Earth from "@/../public/img/mart-1.jpeg";
 import Navigation from "@/components/Navigation/Navigation";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
+import Toast from "@/components/Toast/Toast";
+
+interface LoginResponse {
+  message: string;
+  token?: string;
+}
 
 export const LoginPage = () => {
-  const { fetcher, fetchingStatus, response } = useFetch();
+  const { fetcher, fetchingStatus, response, rowResponse } =
+    useFetch<LoginResponse>();
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -21,11 +28,13 @@ export const LoginPage = () => {
     } as IFetchParams;
 
     fetcher(fetchParams);
-    console.log("Response", response);
   };
 
   return (
     <main className="flex justify-center items-center">
+      {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
+        <Toast>{response?.message}</Toast>
+      ) : null}
       <div className="absolute top-4 right-14">
         <Navigation />
       </div>
