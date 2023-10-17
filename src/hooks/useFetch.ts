@@ -12,17 +12,21 @@ export const useFetch = <T>() => {
     "idle" | "loading" | "succeeded" | "failed"
   >("idle");
   const [response, setResponse] = useState<T>();
+  const [rowResponse, setRowResponse] = useState<Response>();
 
   const fetcher = async ({ url, method, headers, body }: IFetchParams) => {
     try {
       setFetchingStatus("loading");
-      const res: T = await (
-        await fetch(url, {
-          method: method,
-          body: JSON.stringify(body),
-          headers: headers,
-        })
-      ).json();
+      const rowRes = await fetch(url, {
+        method: method,
+        body: JSON.stringify(body),
+        headers: headers,
+      });
+
+      setRowResponse(rowRes);
+
+      const res = await rowRes.json();
+
       setResponse(res);
       setFetchingStatus("succeeded");
     } catch (error) {
@@ -30,5 +34,5 @@ export const useFetch = <T>() => {
     }
   };
 
-  return { fetchingStatus, response, fetcher };
+  return { fetchingStatus, response, fetcher, rowResponse };
 };
