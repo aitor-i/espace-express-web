@@ -7,7 +7,7 @@ import Earth from "@/../public/img/earth-1.jpeg";
 export const HomePage = () => {
   return (
     <div className="h-screen overflow-y-hidden">
-      <div className="flex h-full overflow-hidden flex-col items-center justify-between p-24 overflow-y-hidden glassEffect ">
+      <div className="flex h-full overflow-hidden flex-col items-center justify-between p-24 overflow-y-hidden  ">
         <div className="absolute top-4 right-14">
           <Navigation />
         </div>
