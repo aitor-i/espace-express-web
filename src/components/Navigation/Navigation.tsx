@@ -7,6 +7,7 @@ export default function Navigation() {
       <Link href="/">Home</Link>
       <Link href="/next-flight">Next flights</Link>
       <Link href="/login">Login</Link>
+      <Link href="/register">Register</Link>
     </div>
   );
 }
