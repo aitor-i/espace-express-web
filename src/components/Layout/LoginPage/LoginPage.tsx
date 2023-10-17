@@ -5,15 +5,21 @@ import Earth from "@/../public/img/mart-1.jpeg";
 import Navigation from "@/components/Navigation/Navigation";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import Toast from "@/components/Toast/Toast";
-
+import { RedirectType, redirect } from "next/navigation";
 interface LoginResponse {
   message: string;
   token?: string;
+  username: string;
 }
 
 export const LoginPage = () => {
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<LoginResponse>();
+
+  const redirection = () => {
+    const redirectType = RedirectType.push;
+    redirect("/dashboard", redirectType);
+  };
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -30,6 +36,8 @@ export const LoginPage = () => {
     fetcher(fetchParams);
   };
 
+  if (rowResponse?.ok && fetchingStatus === "succeeded")
+    redirect(`/${response?.username}/dashboard`);
   return (
     <main className="flex justify-center items-center">
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
