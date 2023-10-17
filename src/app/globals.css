@@ -69,6 +69,41 @@ button:hover {
   color: white;
 }
 
+.toast {
+  position: absolute;
+  top: -6rem;
+  left: 50%;
+  text-overflow: ellipsis;
+  transform: translateX(-50%);
+  max-width: 60vw;
+  overflow: hidden;
+  padding: 1rem;
+  animation: toast-appear 3s ease-in;
+}
+
+.error {
+  background-color: rgba(219, 12, 12, 0.3);
+}
+.warn {
+  background-color: rgba(207, 170, 3, 0.3);
+  color: black;
+}
+
+@keyframes toast-appear {
+  0% {
+    top: -6rem;
+  }
+  30% {
+    top: 3rem;
+  }
+  60% {
+    top: 3rem;
+  }
+  70% {
+    top: -6rem;
+  }
+}
+
 @layer components {
   .card {
     border: 1px solid white;
