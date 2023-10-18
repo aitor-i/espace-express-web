@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Image from "next/image";
 import Earth from "@/../public/img/mart-3.jpeg";
 import Navigation from "@/components/Navigation/Navigation";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
+import Toast from "@/components/Toast/Toast";
+import { redirect } from "next/navigation";
+interface RegisterResponse {
+  message: string;
+  token?: string;
+  username: string;
+}
 
 export const RegisterPage = () => {
-  const { fetcher, fetchingStatus, response } = useFetch();
+  const { fetcher, fetchingStatus, response, rowResponse } =
+    useFetch<RegisterResponse>();
+  const [message, setMessage] = useState<string>();
+
   console.log(process.env);
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,6 +26,14 @@ export const RegisterPage = () => {
     const rePassword = formData.get("confirm-password");
     const username = formData.get("username");
 
+    if (password !== rePassword) {
+      setMessage("Password should match!");
+      formData.set("password", "");
+      formData.set("confirm-password", "");
+
+      return;
+    }
+
     const fetchParams = {
       url: "http://localhost:4000/api/space-express/auth/register",
       body: { email, password, username },
@@ -24,11 +42,17 @@ export const RegisterPage = () => {
     } as IFetchParams;
 
     fetcher(fetchParams);
-    console.log("Response", response);
+    if (response?.token) window.localStorage.setItem("token", response?.token);
   };
+
+  if (fetchingStatus === "succeeded" && rowResponse?.ok)
+    redirect(`/${response?.username}/dashboard`);
 
   return (
     <main className="flex justify-center items-center">
+      {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
+        <Toast>{response?.message}</Toast>
+      ) : null}
       <div className="absolute top-4 right-14">
         <Navigation />
       </div>
@@ -59,7 +83,9 @@ export const RegisterPage = () => {
               name="confirm-password"
               id="confirm-password"
             />
+            {message ? <p className="text-red-500 text-xs">{message}</p> : null}
           </span>
+
           <button className="primaryButton">Send</button>
         </form>
       </div>
