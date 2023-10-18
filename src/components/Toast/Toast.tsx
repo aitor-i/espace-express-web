@@ -5,5 +5,5 @@ interface Props {
 }
 
 export default function Toast({ children }: Props) {
-  return <span className="toast glassEffect warn">{children}</span>;
+  return <span className="toast glassEffect warn rounded-md">{children}</span>;
 }
