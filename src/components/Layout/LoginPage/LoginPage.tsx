@@ -16,10 +16,6 @@ export const LoginPage = () => {
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<LoginResponse>();
 
-  const redirection = () => {
-    const redirectType = RedirectType.push;
-    redirect("/dashboard", redirectType);
-  };
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -34,6 +30,8 @@ export const LoginPage = () => {
     } as IFetchParams;
 
     fetcher(fetchParams);
+
+    if (response?.token) window.localStorage.setItem("token", response?.token);
   };
 
   if (rowResponse?.ok && fetchingStatus === "succeeded")
