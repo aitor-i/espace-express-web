@@ -71,6 +71,7 @@ button:hover {
 
 .toast {
   position: absolute;
+  z-index: 1000;
   top: -6rem;
   left: 50%;
   text-overflow: ellipsis;
