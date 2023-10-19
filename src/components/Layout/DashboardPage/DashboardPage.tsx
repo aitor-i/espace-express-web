@@ -4,6 +4,7 @@ import Image from "next/image";
 import BgImage from "@/../public/img/mart-2.jpeg";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
+import { ChangePassword } from "./ChangePassword/ChangePassword";
 interface Props {
   username: string;
 }
@@ -41,7 +42,7 @@ export default function DashboardPage({ username }: Props) {
     redirect("/login");
   }
   return (
-    <main>
+    <main className="flex flex-col">
       <h2>{username.replace("%20", " ")}</h2>
       <div className="absolute top-4 right-14">
         <Navigation />
@@ -51,6 +52,9 @@ export default function DashboardPage({ username }: Props) {
         src={BgImage}
         alt=""
       />
+      <section className="glassEffectDark flex-1 overflow-y-scroll p-2 rounded-md">
+        <ChangePassword />
+      </section>
     </main>
   );
 }
