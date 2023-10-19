@@ -30,12 +30,12 @@ export const LoginPage = () => {
     } as IFetchParams;
 
     fetcher(fetchParams);
-
-    if (response?.token) window.localStorage.setItem("token", response?.token);
   };
 
-  if (rowResponse?.ok && fetchingStatus === "succeeded")
+  if (rowResponse?.ok && fetchingStatus === "succeeded") {
+    window.localStorage.setItem("token", response?.token ?? "");
     redirect(`/${response?.username}/dashboard`);
+  }
   return (
     <main className="flex justify-center items-center">
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
