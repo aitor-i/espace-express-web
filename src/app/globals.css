@@ -33,12 +33,21 @@ h2 {
 h3 {
   font-size: 2rem;
 }
+h4 {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
 .glassEffect {
   backdrop-filter: blur(3px);
   background: rgba(255, 255, 255, 0.1);
-  background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
   /* background-color: red; */
+}
+.glassEffectDark {
+  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.2);
+  /* background-color: transparent; */
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .backgroundImgFit {
   height: calc(100vh - 10rem);
