@@ -22,7 +22,7 @@ export function ChangePassword() {
 
     const fetchParams = {
       url: "http://localhost:4000/api/space-express/auth/change-password",
-      body: { email, password },
+      body: { email, newPassword: password, oldPassword },
       method: "POST",
       headers: { "Content-Type": "application/json" },
     } as IFetchParams;
