@@ -13,6 +13,8 @@ interface LoginResponse {
 }
 
 export const LoginPage = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
+
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<LoginResponse>();
 
@@ -23,7 +25,7 @@ export const LoginPage = () => {
     const password = formData.get("password");
 
     const fetchParams = {
-      url: "http://localhost:4000/api/space-express/auth/login",
+      url: `${baseUrl}/api/space-express/auth/login`,
       body: { email, password },
       method: "POST",
       headers: { "Content-Type": "application/json" },

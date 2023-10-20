@@ -26,9 +26,10 @@ export function ChangePassword() {
 
       return;
     }
+    const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
 
     const fetchParams = {
-      url: "http://localhost:4000/api/space-express/auth/change-password",
+      url: `${baseUrl}/api/space-express/auth/change-password`,
       body: { email, newPassword: password, oldPassword },
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -33,9 +33,10 @@ export const RegisterPage = () => {
 
       return;
     }
+    const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
 
     const fetchParams = {
-      url: "http://localhost:4000/api/space-express/auth/register",
+      url: `${baseUrl}/api/space-express/auth/register`,
       body: { email, password, username },
       method: "POST",
       headers: { "Content-Type": "application/json" },
