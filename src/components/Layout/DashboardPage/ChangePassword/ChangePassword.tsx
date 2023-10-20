@@ -1,8 +1,15 @@
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 
+interface ChangePasswordResponse {
+  message: string;
+  isSuccess: boolean;
+}
+
 export function ChangePassword() {
-  const { fetcher, fetchingStatus, response, rowResponse } = useFetch();
+  const { fetcher, fetchingStatus, response, rowResponse } =
+    useFetch<ChangePasswordResponse>();
   const [message, setMessage] = useState<string>();
   function submitHandler(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,8 +36,7 @@ export function ChangePassword() {
 
     fetcher(fetchParams);
   }
-
-  console.log(response);
+  if (fetchingStatus === "succeeded" && response?.isSuccess) redirect("/login");
   return (
     <section className="flex flex-col w-80">
       <h4>Change password</h4>
