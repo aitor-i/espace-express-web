@@ -57,7 +57,7 @@ export const RegisterPage = () => {
         <Navigation />
       </div>
       <Image className="absolute -z-10 h-screen w-screen " src={Earth} alt="" />
-      <div className="p-16 pt-4 glassEffect rounded-sm">
+      <div className="p-8 pt-4 w-96 glassEffect rounded-sm">
         <h2>Register</h2>
         <form
           onSubmit={submitHandler}
