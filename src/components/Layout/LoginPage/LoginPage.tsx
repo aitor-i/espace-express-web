@@ -45,7 +45,7 @@ export const LoginPage = () => {
         <Navigation />
       </div>
       <Image className="absolute -z-10 h-screen w-screen " src={Earth} alt="" />
-      <div className="p-16 pt-4 glassEffect rounded-sm">
+      <div className="p-8 w-96 pt-4 glassEffect rounded-sm">
         <h2>Login</h2>
         <form
           onSubmit={submitHandler}
