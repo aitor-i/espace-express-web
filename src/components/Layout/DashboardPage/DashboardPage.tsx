@@ -17,7 +17,10 @@ export default function DashboardPage({ username }: Props) {
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<ValidateResponse>();
 
-  if (fetchingStatus === "succeeded" && response?.isValid === false) {
+  if (
+    fetchingStatus === "failed" ||
+    (fetchingStatus === "succeeded" && response?.isValid === false)
+  ) {
     logOut();
   }
 
@@ -41,6 +44,8 @@ export default function DashboardPage({ username }: Props) {
     window.localStorage.setItem("token", "");
     redirect("/login");
   }
+
+  console.log(fetchingStatus);
   return (
     <main className="flex flex-col">
       <h2>{username.replace("%20", " ")}</h2>
@@ -48,7 +53,7 @@ export default function DashboardPage({ username }: Props) {
         <Navigation />
       </div>
       <Image
-        className="absolute -z-10 h-screen w-screen top-0 left-0 "
+        className="absolute -z-10 image top-0 left-0 "
         src={BgImage}
         alt=""
       />
