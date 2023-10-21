@@ -3,52 +3,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Earth from "@/../public/img/mart-3.jpeg";
 import Navigation from "@/components/Navigation/Navigation";
-import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import Toast from "@/components/Toast/Toast";
-import { redirect } from "next/navigation";
-interface RegisterResponse {
-  message: string;
-  token?: string;
-  username: string;
-}
+import { useRegisterPage } from "./useRegisterPage";
 
 export const RegisterPage = () => {
-  const { fetcher, fetchingStatus, response, rowResponse } =
-    useFetch<RegisterResponse>();
-  const [message, setMessage] = useState<string>();
-
-  console.log(process.env);
-  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const rePassword = formData.get("confirm-password");
-    const username = formData.get("username");
-
-    if (password !== rePassword) {
-      setMessage("Password should match!");
-      formData.set("password", "");
-      formData.set("confirm-password", "");
-
-      return;
-    }
-    const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
-
-    const fetchParams = {
-      url: `${baseUrl}/api/space-express/auth/register`,
-      body: { email, password, username },
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    } as IFetchParams;
-
-    fetcher(fetchParams);
-    if (response?.token) window.localStorage.setItem("token", response?.token);
-  };
-
-  if (fetchingStatus === "succeeded" && rowResponse?.ok)
-    redirect(`/${response?.username}/dashboard`);
-
+  const { response, fetchingStatus, rowResponse, submitHandler, message } =
+    useRegisterPage();
   return (
     <main className="flex justify-center items-center">
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
