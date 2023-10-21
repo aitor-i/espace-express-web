@@ -65,7 +65,11 @@ export function ChangePassword() {
           {message ? <p className="text-red-500 text-xs">{message}</p> : null}
         </span>
 
-        <button className="primaryButton">Send</button>
+        {fetchingStatus === "loading" ? (
+          <span className="loader" />
+        ) : (
+          <button className="primaryButton">Send</button>
+        )}
       </form>
     </section>
   );
