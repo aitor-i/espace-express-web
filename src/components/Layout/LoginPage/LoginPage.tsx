@@ -46,7 +46,7 @@ export const LoginPage = () => {
       <div className="absolute top-4 right-14">
         <Navigation />
       </div>
-      <Image className="absolute -z-10 h-screen w-screen " src={Earth} alt="" />
+      <Image className="absolute -z-10 image" src={Earth} alt="" />
       <div className="p-8 w-96 pt-4 glassEffect rounded-sm">
         <h2>Login</h2>
         <form
@@ -62,7 +62,11 @@ export const LoginPage = () => {
             <label htmlFor="">Password</label>
             <input type="password" name="password" id="password" />
           </span>
-          <button className="primaryButton">Send</button>
+          {fetchingStatus === "loading" ? (
+            <span className="loader" />
+          ) : (
+            <button className="primaryButton">Send</button>
+          )}
         </form>
       </div>
     </main>
