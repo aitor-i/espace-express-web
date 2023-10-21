@@ -24,13 +24,13 @@ export default function DashboardPage({ username }: Props) {
   useEffect(() => {
     validateToken();
   }, []);
-
+  const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
   async function validateToken() {
     const token = window.localStorage.getItem("token");
     const body = { token };
     const validateSettings: IFetchParams = {
       method: "POST",
-      url: `http://localhost:4000/api/space-express/auth/validate-token`,
+      url: `${baseUrl}/api/space-express/auth/validate-token`,
       body,
       headers: { "Content-Type": "application/json" },
     };
