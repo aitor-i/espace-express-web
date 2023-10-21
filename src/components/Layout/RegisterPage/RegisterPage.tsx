@@ -57,7 +57,7 @@ export const RegisterPage = () => {
       <div className="absolute top-4 right-14">
         <Navigation />
       </div>
-      <Image className="absolute -z-10 h-screen w-screen " src={Earth} alt="" />
+      <Image className="absolute -z-10 image " src={Earth} alt="" />
       <div className="p-8 pt-4 w-96 glassEffect rounded-sm">
         <h2>Register</h2>
         <form
@@ -87,7 +87,11 @@ export const RegisterPage = () => {
             {message ? <p className="text-red-500 text-xs">{message}</p> : null}
           </span>
 
-          <button className="primaryButton">Send</button>
+          {fetchingStatus === "loading" ? (
+            <span className="loader" />
+          ) : (
+            <button className="primaryButton">Send</button>
+          )}
         </form>
       </div>
     </main>
