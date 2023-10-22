@@ -14,7 +14,7 @@ export const HomePage = () => {
         <h1 className="primary-color text-8xl z-10 font-bold">Space Express</h1>
       </div>
       <Image
-        className="absolute -z-10 image top-40 backgroundImgFit"
+        className="absolute -z-10 image top-0 w-screen"
         src={Earth}
         alt=""
       />
