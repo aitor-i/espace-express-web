@@ -1,43 +1,8 @@
-import { IFetchParams, useFetch } from "@/hooks/useFetch";
-import { redirect } from "next/navigation";
 import React, { useState } from "react";
-
-interface ChangePasswordResponse {
-  message: string;
-  isSuccess: boolean;
-}
+import { useChangePassword } from "./useChangePassword";
 
 export function ChangePassword() {
-  const { fetcher, fetchingStatus, response, rowResponse } =
-    useFetch<ChangePasswordResponse>();
-  const [message, setMessage] = useState<string>();
-  function submitHandler(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const oldPassword = formData.get("old-password");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const rePassword = formData.get("confirm-password");
-
-    if (password !== rePassword) {
-      setMessage("Password should match!");
-      formData.set("password", "");
-      formData.set("confirm-password", "");
-
-      return;
-    }
-    const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
-
-    const fetchParams = {
-      url: `${baseUrl}/api/space-express/auth/change-password`,
-      body: { email, newPassword: password, oldPassword },
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    } as IFetchParams;
-
-    fetcher(fetchParams);
-  }
-  if (fetchingStatus === "succeeded" && response?.isSuccess) redirect("/login");
+  const { submitHandler, fetchingStatus, message } = useChangePassword();
   return (
     <section className="flex flex-col w-80">
       <h4>Change password</h4>
