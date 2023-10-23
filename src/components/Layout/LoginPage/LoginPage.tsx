@@ -1,43 +1,12 @@
-import React from "react";
-
 import Image from "next/image";
 import Earth from "@/../public/img/mart-1.jpeg";
 import Navigation from "@/components/Navigation/Navigation";
-import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import Toast from "@/components/Toast/Toast";
-import { RedirectType, redirect } from "next/navigation";
-interface LoginResponse {
-  message: string;
-  token?: string;
-  username: string;
-}
+import { useLoginPage } from "./useLoginPage";
 
 export const LoginPage = () => {
-  const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
-
-  const { fetcher, fetchingStatus, response, rowResponse } =
-    useFetch<LoginResponse>();
-
-  const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    const fetchParams = {
-      url: `${baseUrl}/api/space-express/auth/login`,
-      body: { email, password },
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-    } as IFetchParams;
-
-    fetcher(fetchParams);
-  };
-
-  if (rowResponse?.ok && fetchingStatus === "succeeded") {
-    window.localStorage.setItem("token", response?.token ?? "");
-    redirect(`/${response?.username}/dashboard`);
-  }
+  const { fetchingStatus, response, rowResponse, submitHandler } =
+    useLoginPage();
   return (
     <main className="flex justify-center items-center">
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
