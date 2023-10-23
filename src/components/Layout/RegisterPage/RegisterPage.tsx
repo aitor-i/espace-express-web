@@ -14,10 +14,14 @@ export const RegisterPage = () => {
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
         <Toast>{response?.message}</Toast>
       ) : null}
+      {fetchingStatus === "failed" ? (
+        <Toast className="error">Error on register!!</Toast>
+      ) : null}
+
       <div className="absolute top-4 right-14">
         <Navigation />
       </div>
-      <Image className="absolute -z-10 image " src={Earth} alt="" />
+      <Image className="absolute -z-10 image w-screen " src={Earth} alt="" />
       <div className="p-8 pt-4 w-96 glassEffect rounded-sm">
         <h2>Register</h2>
         <form
