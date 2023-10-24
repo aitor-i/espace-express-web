@@ -10,4 +10,12 @@ describe("password validation", () => {
     expect(result.valid).toBe(true);
     expect(result.message).toBe("");
   });
+
+  it("should return invalid and provide a message for a weak password", () => {
+    const result = passwordValidation("weakpass");
+    expect(result.valid).toBe(false);
+    expect(result.message).toBe(
+      "Password is not strong enough. It must contain at least one uppercase letter, one number, and be at least 8 characters long."
+    );
+  });
 });
