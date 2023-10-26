@@ -1,3 +1,4 @@
+import { passwordValidation } from "@/application/passwordValidation/passwordValidation";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -18,7 +19,7 @@ export function useRegisterPage() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
-    const password = formData.get("password");
+    const password = formData.get("password") ?? "";
     const rePassword = formData.get("confirm-password");
     const username = formData.get("username");
 
@@ -29,6 +30,13 @@ export function useRegisterPage() {
 
       return;
     }
+    const { valid, message } = passwordValidation(password.toString());
+    if (!valid) {
+      setMessage(message);
+
+      return;
+    }
+
     const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
 
     const fetchParams = {
