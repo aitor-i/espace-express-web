@@ -1,3 +1,4 @@
+import { passwordValidation } from "@/application/passwordValidation/passwordValidation";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
 import { useState } from "react";
@@ -16,13 +17,19 @@ export function useChangePassword() {
     const formData = new FormData(event.currentTarget);
     const oldPassword = formData.get("old-password");
     const email = formData.get("email");
-    const password = formData.get("password");
+    const password = formData.get("password") ?? "";
     const rePassword = formData.get("confirm-password");
 
     if (password !== rePassword) {
       setMessage("Password should match!");
       formData.set("password", "");
       formData.set("confirm-password", "");
+
+      return;
+    }
+    const { valid, message } = passwordValidation(password.toString());
+    if (!valid) {
+      setMessage(message);
 
       return;
     }
