@@ -15,6 +15,7 @@ import Crew from "./Crew/Crew";
 import { RocketImages } from "./RocketImages/RocketImages";
 import { FlightInfo } from "./FlightInfo/FlightInfo";
 import Navigation from "@/components/Navigation/Navigation";
+import Link from "next/link";
 
 interface Props {
   id: string;
@@ -46,6 +47,7 @@ export function FlightPage({ id }: Props) {
         </div>
         <div className="flex justify-between pr-8 pl-8">
           <FlightInfo capsules={capsules} flight={flight} />
+          <Link href={`/select-seat/${flight.id}`}>Buy flying pass</Link>
           <Crew crews={crews} />
         </div>
       </div>
