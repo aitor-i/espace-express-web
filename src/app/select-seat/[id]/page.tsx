@@ -1,5 +1,10 @@
+"use client";
+import { SelectSeatPage } from "@/components/Layout/SelectSeatPage/SelectSeatPage";
 import React from "react";
-
-export default function page() {
-  return <div></div>;
+interface Props {
+  params: { id: string };
+}
+export default function page({ params }: Props) {
+  const { id } = params;
+  return <SelectSeatPage flightId={id} />;
 }
