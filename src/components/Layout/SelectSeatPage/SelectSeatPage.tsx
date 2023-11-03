@@ -2,6 +2,7 @@
 
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
+import { ReserveSeatForm } from "./ReserveSeatForm/ReserveSeatForm";
 interface Props {
   flightId: string;
 }
@@ -18,7 +19,8 @@ interface SeatsResponse {
   seats: Seat[];
 }
 export const SelectSeatPage = ({ flightId }: Props) => {
-  const { fetcher, fetchingStatus, response } = useFetch<SeatsResponse>();
+  const { fetcher, fetchingStatus, response, rowResponse } =
+    useFetch<SeatsResponse>();
   const [selectedNumber, setSelectedNumber] = useState<number>();
 
   const selectNumberHandler = (seatNumber: number) => {
@@ -44,29 +46,36 @@ export const SelectSeatPage = ({ flightId }: Props) => {
     <main>
       <h2>Select your seat</h2>
       <p>Flight id: {flightId}</p>
-      <section className="flex gap-3 flex-wrap w-1/3">
-        {selectedNumber}
-        {fetchingStatus === "succeeded"
-          ? response?.seats.map((seat) =>
-              seat.free ? (
-                <span
-                  key={seat.seatNumber}
-                  onClick={() => selectNumberHandler(seat.seatNumber)}
-                  className="p-4 bg-green-400 w-20 text-center clickable text-white rounded-md "
-                >
-                  {seat.seatNumber}
-                </span>
-              ) : (
-                <span
-                  key={seat.seatNumber}
-                  className="p-4 bg-red-400 w-20 text-center text-white rounded-md"
-                >
-                  {seat.seatNumber}
-                </span>
+      <div className=" flex justify-between p-24">
+        <section className="flex gap-3 flex-wrap w-1/3">
+          {fetchingStatus === "succeeded" && rowResponse?.ok
+            ? response?.seats.map((seat) =>
+                seat.free ? (
+                  <span
+                    key={seat.seatNumber}
+                    onClick={() => selectNumberHandler(seat.seatNumber)}
+                    className="p-4 bg-green-400 w-20 text-center clickable text-white rounded-md "
+                  >
+                    {seat.seatNumber}
+                  </span>
+                ) : (
+                  <span
+                    key={seat.seatNumber}
+                    className="p-4 bg-red-400 w-20 text-center text-white rounded-md"
+                  >
+                    {seat.seatNumber}
+                  </span>
+                )
               )
-            )
-          : null}
-      </section>
+            : null}
+        </section>
+        {selectedNumber ? (
+          <ReserveSeatForm
+            flightId={flightId}
+            selectedNumber={selectedNumber}
+          />
+        ) : null}
+      </div>
     </main>
   );
 };
