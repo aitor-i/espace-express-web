@@ -69,8 +69,8 @@ button {
   cursor: pointer;
 }
 button:hover {
-  scale: 1.07;
-  animation: 0.2s make-bigger ease-out;
+  scale: 1.03;
+  animation: 0.2s make-button-bigger ease-out;
 }
 .clickable {
   cursor: pointer;
@@ -173,6 +173,14 @@ button:hover {
     }
     to {
       scale: 1.07;
+    }
+  }
+  @keyframes make-button-bigger {
+    from {
+      scale: 1;
+    }
+    to {
+      scale: 1.03;
     }
   }
   .image {
