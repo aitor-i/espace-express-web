@@ -72,7 +72,13 @@ button:hover {
   scale: 1.07;
   animation: 0.2s make-bigger ease-out;
 }
-
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  scale: 1.07;
+  animation: 0.2s make-bigger ease-out;
+}
 .primaryButton {
   background-color: black;
   color: white;
