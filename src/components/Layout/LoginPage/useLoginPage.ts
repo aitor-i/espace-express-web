@@ -1,7 +1,7 @@
 "use client";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface LoginResponse {
   message: string;
@@ -10,9 +10,7 @@ interface LoginResponse {
 }
 
 export function useLoginPage() {
-  const [isCookiesAccepted, setIsCookiesAccepted] = useState(
-    window.localStorage.getItem("cookiesAccepted") === "true"
-  );
+  const [isCookiesAccepted, setIsCookiesAccepted] = useState(false);
 
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<LoginResponse>();
@@ -45,6 +43,12 @@ export function useLoginPage() {
     window.localStorage.setItem("cookiesAccepted", "true");
     setIsCookiesAccepted(true);
   };
+
+  useEffect(() => {
+    if (window.localStorage.getItem("cookiesAccepted") === "true")
+      setIsCookiesAccepted(true);
+  }, []);
+
   return {
     rowResponse,
     response,
