@@ -7,7 +7,7 @@ interface Props {
   flightId: string;
 }
 
-interface Seat {
+export interface Seat {
   flightId: string;
   free: boolean;
   reservationDate: string;
