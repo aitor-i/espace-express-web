@@ -1,3 +1,4 @@
+"use client";
 import Navigation from "@/components/Navigation/Navigation";
 import React, { useEffect } from "react";
 import Image from "next/image";

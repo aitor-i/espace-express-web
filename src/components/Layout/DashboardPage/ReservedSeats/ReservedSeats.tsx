@@ -1,3 +1,4 @@
+"use client";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import React, { useEffect, useState } from "react";
 import { Seat } from "../../SelectSeatPage/SelectSeatPage";

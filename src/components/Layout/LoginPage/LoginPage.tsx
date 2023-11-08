@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Earth from "@/../public/img/mart-1.jpeg";
 import Navigation from "@/components/Navigation/Navigation";

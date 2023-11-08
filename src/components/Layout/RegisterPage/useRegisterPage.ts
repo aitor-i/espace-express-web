@@ -1,3 +1,4 @@
+"use client";
 import { passwordValidation } from "@/application/passwordValidation/passwordValidation";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";

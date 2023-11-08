@@ -1,3 +1,4 @@
+"use client";
 import Toast from "@/components/Toast/Toast";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import React from "react";

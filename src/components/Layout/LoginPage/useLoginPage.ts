@@ -1,3 +1,4 @@
+"use client";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
 
