@@ -30,8 +30,8 @@ const Table = <T extends Record<string, number | string | boolean>>({
             key={String(row + Math.random().toString())}
             className={
               rowIndex % 2 === 0
-                ? "bg-slate-400 opacity-25"
-                : "bg-slate-50 opacity-5"
+                ? "bg-slate-400 opacity-70 text-black text-center"
+                : "bg-slate-50 opacity-90 text-black text-center"
             }
           >
             {columns.map(({ key, render }) => (
