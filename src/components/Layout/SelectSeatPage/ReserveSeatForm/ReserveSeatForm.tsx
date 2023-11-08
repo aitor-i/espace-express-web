@@ -1,3 +1,4 @@
+import Toast from "@/components/Toast/Toast";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import React from "react";
 
@@ -28,7 +29,8 @@ export function ReserveSeatForm({ selectedNumber, flightId }: Props) {
       url: `${baseUrl}/api/space-express/select-seat/reserveSeat/`,
       body: { flightId, seatNumber: selectedNumber, userEmail: email },
       method: "POST",
-      headers: { "Content-Type": "application/json", token: token },
+      headers: { "Content-Type": "application/json", token: token, email },
+      credentials: "include",
     } as IFetchParams;
 
     fetcher(fetchParams);
@@ -42,6 +44,9 @@ export function ReserveSeatForm({ selectedNumber, flightId }: Props) {
         <input type="email" name="email" placeholder="email@email.com" />
         <button>Confirm reservation</button>
       </form>
+      {fetchingStatus === "succeeded" && response?.message ? (
+        <Toast>{<p>{response?.message}</p>}</Toast>
+      ) : null}
     </section>
   );
 }
