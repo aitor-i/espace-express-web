@@ -5,6 +5,8 @@ import BgImage from "@/../public/img/mart-2.jpeg";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
 import { ChangePassword } from "./ChangePassword/ChangePassword";
+import { ReserveSeatForm } from "../SelectSeatPage/ReserveSeatForm/ReserveSeatForm";
+import { ReservedSeats } from "./ReservedSeats/ReservedSeats";
 interface Props {
   username: string;
 }
@@ -59,6 +61,7 @@ export default function DashboardPage({ username }: Props) {
       />
       <section className="glassEffectDark flex-1 overflow-y-scroll p-2 rounded-md">
         <ChangePassword />
+        <ReservedSeats />
       </section>
     </main>
   );
