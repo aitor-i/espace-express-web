@@ -1,6 +1,7 @@
 "use client";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import { redirect } from "next/navigation";
+import { useState } from "react";
 
 interface LoginResponse {
   message: string;
@@ -9,10 +10,13 @@ interface LoginResponse {
 }
 
 export function useLoginPage() {
-  const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
+  const [isCookiesAccepted, setIsCookiesAccepted] = useState(
+    window.localStorage.getItem("cookiesAccepted") === "true"
+  );
 
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<LoginResponse>();
+  const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
 
   const submitHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -36,5 +40,17 @@ export function useLoginPage() {
     redirect(`/${response?.username}/dashboard`);
   }
 
-  return { rowResponse, response, submitHandler, fetchingStatus };
+  const acceptCookiesHandler = () => {
+    console.log(isCookiesAccepted);
+    window.localStorage.setItem("cookiesAccepted", "true");
+    setIsCookiesAccepted(true);
+  };
+  return {
+    rowResponse,
+    response,
+    submitHandler,
+    fetchingStatus,
+    acceptCookiesHandler,
+    isCookiesAccepted,
+  };
 }

@@ -8,18 +8,15 @@ import { CookiesBanner } from "./CookiesBanner/CookiesBanner";
 import { useEffect, useState } from "react";
 
 export const LoginPage = () => {
-  const { fetchingStatus, response, rowResponse, submitHandler } =
-    useLoginPage();
+  const {
+    fetchingStatus,
+    response,
+    rowResponse,
+    submitHandler,
+    acceptCookiesHandler,
+    isCookiesAccepted,
+  } = useLoginPage();
 
-  const [isCookiesAccepted, setIsCookiesAccepted] = useState(
-    window.localStorage.getItem("cookiesAccepted") === "true"
-  );
-
-  const acceptCookiesHandler = () => {
-    console.log(isCookiesAccepted);
-    window.localStorage.setItem("cookiesAccepted", "true");
-    setIsCookiesAccepted(true);
-  };
   return (
     <main className="flex justify-center items-center">
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
