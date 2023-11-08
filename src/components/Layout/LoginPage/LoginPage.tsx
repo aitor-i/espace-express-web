@@ -3,10 +3,22 @@ import Earth from "@/../public/img/mart-1.jpeg";
 import Navigation from "@/components/Navigation/Navigation";
 import Toast from "@/components/Toast/Toast";
 import { useLoginPage } from "./useLoginPage";
+import { CookiesBanner } from "./CookiesBanner/CookiesBanner";
+import { useEffect, useState } from "react";
 
 export const LoginPage = () => {
   const { fetchingStatus, response, rowResponse, submitHandler } =
     useLoginPage();
+
+  const [isCookiesAccepted, setIsCookiesAccepted] = useState(
+    window.localStorage.getItem("cookiesAccepted") === "true"
+  );
+
+  const acceptCookiesHandler = () => {
+    console.log(isCookiesAccepted);
+    window.localStorage.setItem("cookiesAccepted", "true");
+    setIsCookiesAccepted(true);
+  };
   return (
     <main className="flex justify-center items-center">
       {!rowResponse?.ok && fetchingStatus === "succeeded" ? (
@@ -38,6 +50,9 @@ export const LoginPage = () => {
           )}
         </form>
       </div>
+      {!isCookiesAccepted ? (
+        <CookiesBanner onAcceptCookies={acceptCookiesHandler} />
+      ) : null}
     </main>
   );
 };

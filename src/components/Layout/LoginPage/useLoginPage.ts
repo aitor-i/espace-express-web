@@ -24,6 +24,7 @@ export function useLoginPage() {
       body: { email, password },
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
     } as IFetchParams;
 
     fetcher(fetchParams);
