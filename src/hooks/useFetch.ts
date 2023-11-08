@@ -5,6 +5,7 @@ export interface IFetchParams {
   method?: "GET" | "POST" | "PUT" | "DELETE";
   headers?: { [key: string]: string };
   body?: {};
+  credentials?: "include" | "same-origin";
 }
 
 export const useFetch = <T>() => {
@@ -14,13 +15,12 @@ export const useFetch = <T>() => {
   const [response, setResponse] = useState<T>();
   const [rowResponse, setRowResponse] = useState<Response>();
 
-  const fetcher = async ({ url, method, headers, body }: IFetchParams) => {
+  const fetcher = async ({ url, body, ...params }: IFetchParams) => {
     try {
       setFetchingStatus("loading");
       const rowRes = await fetch(url, {
-        method: method,
         body: JSON.stringify(body),
-        headers: headers,
+        ...params,
       });
 
       setRowResponse(rowRes);
