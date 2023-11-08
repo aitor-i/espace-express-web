@@ -93,7 +93,20 @@ button:hover {
   color: white;
 }
 
-.toast {
+.toastOn {
+  position: absolute;
+  z-index: 1000;
+  top: 3rem;
+  left: 50%;
+  text-overflow: ellipsis;
+  transform: translateX(-50%);
+  max-width: 60vw;
+  overflow: hidden;
+  padding: 1rem;
+  animation: toast-appear 1s ease-in;
+}
+
+.toastOff {
   position: absolute;
   z-index: 1000;
   top: -6rem;
@@ -103,7 +116,7 @@ button:hover {
   max-width: 60vw;
   overflow: hidden;
   padding: 1rem;
-  animation: toast-appear 3s ease-in;
+  animation: toast-disappear 0.5s ease-in;
 }
 
 .error {
@@ -149,13 +162,15 @@ button:hover {
   0% {
     top: -6rem;
   }
-  30% {
+  100% {
     top: 3rem;
   }
-  60% {
+}
+@keyframes toast-disappear {
+  0% {
     top: 3rem;
   }
-  70% {
+  100% {
     top: -6rem;
   }
 }
