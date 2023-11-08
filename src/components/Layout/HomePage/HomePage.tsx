@@ -17,6 +17,7 @@ export const HomePage = () => {
         className="absolute -z-10 image top-0 w-screen"
         src={Earth}
         alt=""
+        placeholder="blur"
       />
     </div>
   );
