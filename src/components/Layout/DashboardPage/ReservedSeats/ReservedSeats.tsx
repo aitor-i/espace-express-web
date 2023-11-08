@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Seat } from "../../SelectSeatPage/SelectSeatPage";
 import List from "@/components/List/List";
 
+interface ListSeats extends Seat, Record<string, string | number | boolean> {}
 interface ReservedSeatsResponse {
   message: string;
-  seats: Seat[];
+  seats: ListSeats[];
 }
 
 const columns = [
