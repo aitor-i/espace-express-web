@@ -38,14 +38,14 @@ h4 {
   font-weight: bold;
 }
 .glassEffect {
-  backdrop-filter: blur(3px);
-  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(3px) saturate(200%);
+  background: rgba(255, 255, 255, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.1);
   /* background-color: red; */
 }
 .glassEffectDark {
-  backdrop-filter: blur(3px);
-  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px) saturate(200%);
+  background: rgba(0, 0, 0, 0.3);
   /* background-color: transparent; */
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -68,10 +68,19 @@ button {
   padding: 0.5rem;
   cursor: pointer;
 }
+.secondaryButton {
+  border-radius: 3px;
+  font-weight: bold;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 2px solid white;
+}
+.secondaryButton:hover,
 button:hover {
   scale: 1.03;
   animation: 0.2s make-button-bigger ease-out;
 }
+
 .clickable {
   cursor: pointer;
 }
