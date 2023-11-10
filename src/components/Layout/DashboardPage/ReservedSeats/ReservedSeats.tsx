@@ -3,6 +3,8 @@ import { IFetchParams, useFetch } from "@/hooks/useFetch";
 import React, { useEffect, useState } from "react";
 import { Seat } from "../../SelectSeatPage/SelectSeatPage";
 import List from "@/components/List/List";
+import Navigation from "@/components/Navigation/Navigation";
+import Toast from "@/components/Toast/Toast";
 
 interface ListSeats extends Seat, Record<string, string | number | boolean> {}
 interface ReservedSeatsResponse {
@@ -36,6 +38,9 @@ export function ReservedSeats() {
 
   return (
     <div>
+      {!rowResponse?.ok && response?.message ? (
+        <Toast>{response.message}</Toast>
+      ) : null}
       <h3>Your next flights</h3>
       {response?.seats && <List columns={columns} data={response?.seats} />}
     </div>
