@@ -1,18 +1,23 @@
 "use client";
 import Toast from "@/components/Toast/Toast";
 import { IFetchParams, useFetch } from "@/hooks/useFetch";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   selectedNumber: number;
   flightId: string;
+  onReservationSuccess: () => void;
 }
 interface ReservationResponse {
   message: string;
   isSuccess: boolean;
 }
 
-export function ReserveSeatForm({ selectedNumber, flightId }: Props) {
+export function ReserveSeatForm({
+  selectedNumber,
+  flightId,
+  onReservationSuccess,
+}: Props) {
   const { fetcher, fetchingStatus, response, rowResponse } =
     useFetch<ReservationResponse>();
 
@@ -35,7 +40,13 @@ export function ReserveSeatForm({ selectedNumber, flightId }: Props) {
     } as IFetchParams;
 
     fetcher(fetchParams);
+    event.currentTarget.reset();
   };
+
+  useEffect(() => {
+    if (fetchingStatus === "succeeded") onReservationSuccess();
+  }, [fetchingStatus]);
+
   return (
     <section className="w-1/3">
       <h3>Reserve seat</h3>
@@ -43,7 +54,11 @@ export function ReserveSeatForm({ selectedNumber, flightId }: Props) {
         <p>Selected seat: {selectedNumber}</p>
         <label>Reserve the seat with your email</label>
         <input type="email" name="email" placeholder="email@email.com" />
-        <button>Confirm reservation</button>
+        {fetchingStatus === "loading" ? (
+          <span className="loader" />
+        ) : (
+          <button>Confirm reservation</button>
+        )}
       </form>
       {fetchingStatus === "succeeded" && response?.message ? (
         <Toast>{<p>{response?.message}</p>}</Toast>
