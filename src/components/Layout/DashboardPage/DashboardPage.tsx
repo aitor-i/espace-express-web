@@ -50,7 +50,7 @@ export default function DashboardPage({ username }: Props) {
 
   console.log(fetchingStatus);
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col h-screen">
       <h2>{username.replace("%20", " ")}</h2>
       <div className="absolute top-4 right-14">
         <Navigation />
@@ -60,7 +60,7 @@ export default function DashboardPage({ username }: Props) {
         src={BgImage}
         alt=""
       />
-      <section className="glassEffectDark flex-1 overflow-y-scroll p-2 rounded-md">
+      <section className="glassEffectDark flex-1 overflow-y-scroll p-2 rounded-md overflow-y-scroll h-5/6">
         <ChangePassword />
         <ReservedSeats />
       </section>
