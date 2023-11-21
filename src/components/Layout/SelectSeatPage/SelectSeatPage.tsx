@@ -6,6 +6,7 @@ import { ReserveSeatForm } from "./ReserveSeatForm/ReserveSeatForm";
 import Toast from "@/components/Toast/Toast";
 import Navigation from "@/components/Navigation/Navigation";
 import Link from "next/link";
+import { useSelectSeatPage } from "./useSelectSeatPage";
 interface Props {
   flightId: string;
 }
@@ -17,45 +18,20 @@ export interface Seat {
   seatNumber: number;
 }
 
-interface SeatsResponse {
-  message: string;
-  seats: Seat[];
-}
 export const SelectSeatPage = ({ flightId }: Props) => {
-  const [token, setToken] = useState<string>();
-  console.log(token);
-
-  const { fetcher, fetchingStatus, response, rowResponse } =
-    useFetch<SeatsResponse>();
-  const [selectedNumber, setSelectedNumber] = useState<number>();
-
-  const selectNumberHandler = (seatNumber: number) => {
-    setSelectedNumber(seatNumber);
-  };
-
-  const baseUrl = process.env.NEXT_PUBLIC_AUTH_API_BASE_URL;
-  const header = new Headers();
-  header.append("token", token!);
-
-  const fetchParams = {
-    url: `${baseUrl}/api/space-express/select-seat/getSeats/`,
-    method: "GET",
-    headers: { "Content-Type": "application/json", token: token, id: flightId },
-  } as IFetchParams;
-
-  const fetchSeatsAvailability = () => {
-    fetcher(fetchParams);
-    setSelectedNumber(undefined);
-  };
-
-  useEffect(() => {
-    setToken(window.localStorage.getItem("token") ?? "  ");
-    if (token) fetchSeatsAvailability();
-  }, [token]);
-
+  const {
+    fetchSeatsAvailability,
+    rowResponse,
+    selectNumberHandler,
+    selectedNumber,
+    response,
+    fetchingStatus,
+  } = useSelectSeatPage(flightId);
   return (
     <main>
-      {response?.message ? <Toast>{response.message}</Toast> : null}
+      {!rowResponse?.ok && response?.message ? (
+        <Toast>{response.message}</Toast>
+      ) : null}
       <span className="absolute top-4 right-4">
         <Navigation />
       </span>
