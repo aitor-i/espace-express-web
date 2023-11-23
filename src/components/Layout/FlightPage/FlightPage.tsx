@@ -16,24 +16,14 @@ import { RocketImages } from "./RocketImages/RocketImages";
 import { FlightInfo } from "./FlightInfo/FlightInfo";
 import Navigation from "@/components/Navigation/Navigation";
 import Link from "next/link";
+import { useFlightPage } from "./useFlightPage";
 
 interface Props {
   id: string;
 }
 
 export function FlightPage({ id }: Props) {
-  const flight = use(serverFetching(`${LAUNCHES_ENDPOINT}/${id}`)) as Launch;
-  const rocket = use(
-    serverFetching(`${ROCKETS_ENDPOINT}/${flight.rocket}`)
-  ) as Rocket;
-  const crews = flight.crew.map((crew) =>
-    use(serverFetching(`${CREW_ENDPOINT}/${crew}`))
-  ) as Crews;
-
-  const capsules = flight.capsules.map((capsule) => {
-    console.log(capsule);
-    return use(serverFetching(`${CAPSULES_ENDPOINT}/${capsule}`));
-  }) as Capsules;
+  const { flight, capsules, crews, rocket } = useFlightPage(id);
 
   return (
     <main className="flex gap-8 flex-col">
